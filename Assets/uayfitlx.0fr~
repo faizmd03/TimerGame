@@ -1,0 +1,58 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CharacterMovement : MonoBehaviour
+{
+    public Rigidbody player;
+    public float speed;
+    public float rotateSpeed;
+    public float axisSpeed;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Rotate((Input.GetAxis("Mouse Y") * axisSpeed * Time.deltaTime), (Input.GetAxis("Mouse X") * axisSpeed * Time.deltaTime), 0, (float)Space.World);
+
+
+       // transform.Rotate(( Input.GetAxis("Mouse Y") * rotateSpeed * Time.deltaTime) ,0, (float)Space.World);
+       if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        {
+            player.velocity = transform.forward * speed;
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        {
+            player.velocity = -transform.forward * speed;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKey(KeyCode.A))
+        {
+           transform.Rotate(2*rotateSpeed * Time.deltaTime * new Vector3(0, -1, 0), Space.World);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKey(KeyCode.D))
+        {
+            transform.Rotate(2*rotateSpeed * Time.deltaTime * new Vector3(0, -1, 0), Space.World);
+        } 
+        if(Input.GetKeyUp(KeyCode.A))
+        {
+            player.Sleep();
+        }
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            player.Sleep();
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            player.Sleep();
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            player.Sleep();
+        }
+    }
+   
+}
